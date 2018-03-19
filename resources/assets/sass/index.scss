@@ -1,0 +1,19 @@
+.input {
+    &-central {
+        margin: auto;
+        width: 1200px;
+    }
+
+    &-width {
+        &-m {
+            width: 80px;
+            text-align: center;
+        }
+    }
+}
+
+.index {
+    &-form {
+        height: 200px;
+    }
+}

@@ -26,6 +26,8 @@ class AppController extends Controller {
             ]
         );
         return view('index', [
+            'title' => '旺财助手',
+            'logo' => 'logo.jpg',
             'menuItems' => $menuItems
         ]);
     }
