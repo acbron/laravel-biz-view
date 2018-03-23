@@ -7,19 +7,19 @@ class AppController extends Controller {
     public function index() {
         $menuItems = array(
             [
-                'icon' => 'glyphicon-file',
+                'icon' => 'oi-clipboard',
                 'url' => 'a',
                 'text' => '一键复制',
                 'active' => 'active'
             ],
             [
-                'icon' => 'glyphicon-comment',
+                'icon' => 'oi-comment-square',
                 'url' => 'b',
                 'text' => '自动评价',
                 'active' => 'inactive'
             ],
             [
-                'icon' => 'glyphicon-send',
+                'icon' => 'oi-cart',
                 'url' => 'c',
                 'text' => '智能重发',
                 'active' => 'inactive'

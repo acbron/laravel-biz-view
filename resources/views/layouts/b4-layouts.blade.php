@@ -19,12 +19,16 @@
     <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" 
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
         crossorigin="anonymous"></script>
-    <link href="{{ URL::asset('css/open-iconic/font/css/open-iconic-bootstrap.css') }}" rel="stylesheet">
 </head>
 <body class="app-body">
-    <nav class="navbar navbar-light bg-dark" style="height: 80px; background-color: #ff9000; box-shadow: 1px 1px 10px grey;">
-        @yield('logo')
+    <nav class="navbar-white navbar-expand fixed-top">
+        <div class="navbar-container">
+            <div class="navbar-container-left">
+                @yield('logo')
+            </div>
+        </div>
     </nav>
+
 
     <div class="sidebar sidebar-left">
         <div class="sidebar-wrapper">
