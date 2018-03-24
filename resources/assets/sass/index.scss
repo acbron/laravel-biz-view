@@ -1,13 +1,19 @@
 .input {
-    &-central {
-        margin: auto;
-        width: 1200px;
+    &-box {
+        display: flex;
     }
 
-    &-width {
-        &-m {
-            width: 80px;
-            text-align: center;
+    &-net {
+        margin: auto;
+        max-width: 800px;
+    }
+
+    &-group-orange {
+        & input {
+            &:focus {
+                border: 1px solid #ff6000;
+                box-shadow: none;
+            }
         }
     }
 }
@@ -15,5 +21,85 @@
 .index {
     &-form {
         height: 200px;
+    }
+}
+
+.form-focus {
+    &-orange {
+        & input {
+            &:focus {
+                border: 1px solid #ff6000;
+                box-shadow: none;
+            }
+        }
+        & button {
+            &:focus {
+                border: 1px solid #ff6000;
+                box-shadow: none;
+            }
+            &:active {
+                box-shadow: none;
+                border: 1px solid #ff6000;
+            }
+        }
+    }
+}
+
+.menu {
+    &-item {
+        height: 30px;
+        cursor: pointer;
+        &:hover {
+            background-color: #ff5000;
+        }
+    }
+    &-span {
+        margin: 5px; 
+        padding: 0 4px; 
+        font-size: 16px; 
+        color: white;
+        line-height: 30px;
+        &:hover {
+            background-color: #ff5000;
+        }
+    }
+}
+
+.fuzhi {
+    &-textarea {
+        width:100%; 
+        border: 1px solid #DCDCDC;
+        border-radius: 2px;
+        &:focus {
+            border: 1px solid #ff5000;
+            outline: none;
+        }
+    }
+
+    &-span {
+        cursor: pointer;
+        font-size: 13px;
+        margin: auto 5px;
+        padding: 3px;
+        &.active {
+            background-color: #FF0036;
+            border-radius: 1px;
+            color: white;
+        }
+    }
+
+    &-button {
+        cursor: pointer;
+        background:#ff7300;
+        border:none; 
+        border-radius: 2px;
+        width:120px;
+        height: 30px;
+        color: white;
+        font-size: 14px;
+        &:focus {
+            background-color: #ff5000;
+            outline: none;
+        }
     }
 }

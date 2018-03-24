@@ -1,14 +1,100 @@
-.input-central {
-  margin: auto;
-  width: 1200px;
+.input-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
-.input-width-m {
-  width: 80px;
-  text-align: center;
+.input-net {
+  margin: auto;
+  max-width: 800px;
+}
+
+.input-group-orange input:focus {
+  border: 1px solid #ff6000;
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 
 .index-form {
   height: 200px;
+}
+
+.form-focus-orange input:focus {
+  border: 1px solid #ff6000;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.form-focus-orange button:focus {
+  border: 1px solid #ff6000;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.form-focus-orange button:active {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  border: 1px solid #ff6000;
+}
+
+.menu-item {
+  height: 30px;
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  background-color: #ff5000;
+}
+
+.menu-span {
+  margin: 5px;
+  padding: 0 4px;
+  font-size: 16px;
+  color: white;
+  line-height: 30px;
+}
+
+.menu-span:hover {
+  background-color: #ff5000;
+}
+
+.fuzhi-textarea {
+  width: 100%;
+  border: 1px solid #DCDCDC;
+  border-radius: 2px;
+}
+
+.fuzhi-textarea:focus {
+  border: 1px solid #ff5000;
+  outline: none;
+}
+
+.fuzhi-span {
+  cursor: pointer;
+  font-size: 13px;
+  margin: auto 5px;
+  padding: 3px;
+}
+
+.fuzhi-span.active {
+  background-color: #FF0036;
+  border-radius: 1px;
+  color: white;
+}
+
+.fuzhi-button {
+  cursor: pointer;
+  background: #ff7300;
+  border: none;
+  border-radius: 2px;
+  width: 120px;
+  height: 30px;
+  color: white;
+  font-size: 14px;
+}
+
+.fuzhi-button:focus {
+  background-color: #ff5000;
+  outline: none;
 }
 

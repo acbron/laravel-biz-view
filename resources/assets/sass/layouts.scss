@@ -12,8 +12,8 @@ $side-bar-width: 200px;
     background-color: #FFF;
     border: 0;
     margin-bottom: 0;
-    //border-bottom: 1px solid #e6e5e5;
-    border-bottom: 3px solid #ff6000;
+    border-bottom: 1px solid #e6e5e5;
+    // border-bottom: 3px solid #ff6000;
     padding: 0;
     min-height: $navbar-fixed-height;
 }
@@ -75,20 +75,20 @@ $side-bar-width: 200px;
         & li {
             list-style: none;
 
-            :hover {
+            &:hover {
                 background-color: #eee;
             }
 
-            & .active {
+            &.active {
                 color: #ff6000;
             }
 
-            & .inactive {
+            &.inactive {
                 color: #646464;
             }
         }
 
-        &-a {
+        &-li {
             display: block;
             padding: 0 20px;
             font-size: 14px;
@@ -100,6 +100,7 @@ $side-bar-width: 200px;
             &:hover {
                 text-decoration: none;
                 box-sizing: border-box;
+                cursor: pointer;
             }
         }
 
