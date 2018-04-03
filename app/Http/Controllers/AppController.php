@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Utils\QueryUtils;
+use App\Http\Requests;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
 class AppController extends Controller {
     
     public function index() {
@@ -35,8 +40,12 @@ class AppController extends Controller {
         ]);
     }
 
-    public function copy($url) {
-        
+    public function copyUrl(Request $request) {
+        $result2 = QueryUtils::getElements($url, 0);
+        return response()->json(array(
+            'status' => 200,
+            'data' => $result2
+        ));
     }
 
 }

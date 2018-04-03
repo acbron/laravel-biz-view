@@ -5,26 +5,131 @@ use QL\QueryList;
 
 class QueryUtils {
 
-    // products
-    public static $ALIBABA = 0;
-    public static $TAOBAO = 1;
-    public static $TMALL = 2;
-
-    // map
-    public static $SELECTOR = array(
-        0 => array(
-            0 => 'div#mod-detail-title > h1'
-        )
-    );
-
-    public static function getElements($url, $site) {
-        $html = QueryList::get($url);
-        if ($site === self::$ALIBABA) {
-            self::getAlibaba($html);
-        }       
-        return '';
+    private static function getHtml($url) {
+        if (is_null($url) or empty($url)) {
+            return;
+        }
+        $html = QueryList::get($url)->encoding('UTF-8')::getHtml();
+        return $html;
     }
 
+    public static function getCopyContent($url, $type) {
+        if (is_null($url) or empty($url) or is_null($type)) {
+            return;
+        }
+        $html = self::getHtml($url);
+        if ($type === 0) {
+            return self::getAlibaba($html);
+        } else if ($type === 1) {
+            return self::getTmall($html);
+        } else if ($type === 2) {
+            return self::getTaobao($html);
+        }
+    }
+
+    /*
+     * Get Tmall product information
+     */
+    private static function getTmall($html) {
+        phpQuery::newDocumentHTML($html);
+
+        // title
+        $title = pq('div.tb-detail-hd > h1')->find('a')->text();
+        
+        // properties
+        $propertyList = array();
+        $DOM_property = pq('div.tb-sku .tm-sale-prop');
+        foreach ($DOM_property['ul'] as $dom_ul_prop) {
+            $DOM_UL_property = pq($dom_ul_prop);
+            $propTitle = $DOM_UL_property->attr('data-property');
+            $propertyList[$propTitle] = array();
+            foreach ($DOM_UL_property['li'] as $dom_li_prop) {
+                $DOM_A_property = pq($dom_li_prop)->find('a');
+                $value = $DOM_A_property->text();
+                $value = self::stripStr($value);
+                // for color classification, there are some images
+                $imgStyle = $DOM_A_property->attr('style');
+                if (!is_null($imgStyle) && !empty($imgStyle)) {
+                    array_push($propertyList[$propTitle], array('value' => $value, 'img' => $imgStyle));
+                } else {
+                    array_push($propertyList[$propTitle], array('value' => $value));
+                }
+            }
+        }
+
+        // attributes
+        $attributeList = array(
+            '产品参数' => array()
+        );
+        $DOM_attribute = pq('div.attributes-list');
+        $DOM_UL_attribute = $DOM_attribute->find('ul#J_AttrUL');
+        foreach ($DOM_UL_attribute['li'] as $dom_li_attr) {
+            $attr = pq($dom_li_attr)->text();
+            $attr = self::stripStr($attr);
+            $attrKV = explode(":", $attr);
+            array_push($attributeList['产品参数'], array($attrKV[0] => $attrKV[1]));
+        }
+
+        return array(
+            'title' => $title,
+            'properties' => $propertyList,
+            'attributes' => $attributeList
+        );
+    }
+
+    /*
+     * Get Taobao product information
+     */
+    private static function getTaobao($html) {
+        phpQuery::newDocumentHTML($html);
+        
+        // title
+        $title = pq('div.tb-title > h3')->text();
+        $title = self::stripStr($title);
+        
+        // properties
+        $propertyList = array();
+        $DOM_property = pq('div.tb-skin .tb-prop');
+        foreach ($DOM_property['ul'] as $dom_ul_prop) {
+            $DOM_UL_property = pq($dom_ul_prop);
+            $propTitle = $DOM_UL_property->attr('data-property');
+            $propertyList[$propTitle] = array();
+            foreach ($DOM_UL_property['li'] as $dom_li_prop) {
+                $DOM_A_property = pq($dom_li_prop)->find('a');
+                $value = $DOM_A_property->text();
+                $value = self::stripStr($value);
+                // for color classification, there are some images
+                $imgStyle = $DOM_A_property->attr('style');
+                if (!is_null($imgStyle) && !empty($imgStyle)) {
+                    array_push($propertyList[$propTitle], array('value' => $value, 'img' => $imgStyle));
+                } else {
+                    array_push($propertyList[$propTitle], array('value' => $value));
+                }
+            }
+        }
+
+        // attributes
+        $attributeList = array(
+            '产品参数' => array()
+        );
+        $DOM_attribute = pq('ul.attributes-list');
+        foreach ($DOM_attribute['li'] as $dom_li_attr) {
+            $attr = pq($dom_li_attr)->text();
+            $attr = self::stripStr($attr);
+            $attrKV = explode(":", $attr);
+            array_push($attributeList['产品参数'], array($attrKV[0] => $attrKV[1]));
+        }
+
+        return array(
+            'title' => $title,
+            'properties' => $propertyList,
+            'attributes' => $attributeList
+        );
+    }
+
+    /*
+     * Get 1688 product information
+     */
     private static function getAlibaba($html) {
         $encodedHtml = $html->encoding('UTF-8', 'GB2312');
 
@@ -64,6 +169,11 @@ class QueryUtils {
         // echo gettype($imageHtml);
         // echo $imageHtml;
     }
+
+    private static function stripStr($str) {
+        return str_replace(array("\r\n", "\r", "\n", " ", "\t", "&nbsp;"), "", $str);
+    }
+
 }
 
 ?>

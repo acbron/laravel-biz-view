@@ -88,6 +88,21 @@ var copyTextArea = $('#fuzhi-textarea');
 jQuery.fn.onCopyBtnClick = function () {
     var text = copyTextArea.val();
     console.log(text);
+    $.ajax({
+        type: 'POST',
+        url: 'copyUrl',
+        data: { url: text },
+        dataType: 'json',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function success(data) {
+            console.log(data.data);
+        },
+        error: function error(xhr, type) {
+            alert('Ajax error!');
+        }
+    });
 };
 
 /* Action */
